@@ -1,0 +1,177 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景图片设置 */
+body {
+    font-family: Arial, sans-serif;
+    background: url("../image/2.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 半透明和模糊效果的容器 */
+.container {
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明效果 */
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px); /* 背景模糊效果 */
+}
+
+/* 顶部标题部分 */
+.header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.header p {
+    font-size: 1em;
+    color: #888;
+}
+
+/* 数据面板布局 */
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.data-panel {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 180px;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.data-panel h2 {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 温度显示区域 */
+.temperature-panel .data-value {
+    font-size: 2em;
+    color: #333;
+}
+
+.temperature-panel .sub-value {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.thermometer {
+    height: 150px;
+    width: 20px;
+    background-color: #ddd;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.thermometer-fill {
+    width: 100%;
+    height: 50%;
+    background-color: #4CAF50;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 距离显示区域 */
+.distance-panel .data-value {
+    font-size: 2em;
+    color: #333;
+}
+
+.distance-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.distance-options button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #555;
+    cursor: pointer;
+}
+
+.distance-options button:hover {
+    background-color: #ccc;
+}
+
+/* 系统状态显示 */
+.system-panel .data-value {
+    font-size: 2.5em;
+    color: #333;
+}
+
+/* 状态显示区域 */
+.status-panel .status-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+.status-panel .icon-sun {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.status-panel p {
+    font-size: 1em;
+    color: #333;
+}
+
+/* 底部刷新按钮 */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.refresh-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.refresh-button:hover {
+    background-color: #45a049;
+}

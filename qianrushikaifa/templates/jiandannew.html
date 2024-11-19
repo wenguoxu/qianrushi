@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能寝室监控系统</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/44.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 引入 jQuery -->
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- 顶部标题部分 -->
+        <header class="header">
+            <h1>智能寝室</h1>
+            <p>Smart Dormitory Monitoring</p>
+        </header>
+
+        <!-- 数据面板区域 -->
+        <main class="dashboard">
+            <!-- 温度模块 -->
+            <div class="data-panel temperature-panel">
+                <h2>Temperature</h2>
+                <div class="data-value">
+                    <span id="temperature">25.5°C</span>
+<!--                    <span class="sub-value" id="temperature-sub">±2.5°C</span>-->
+                </div>
+                <div class="thermometer">
+                    <div class="thermometer-fill"></div>
+                </div>
+            </div>
+
+            <!-- 距离模块 -->
+            <div class="data-panel distance-panel">
+                <h2>Distance</h2>
+                <div class="data-value" id="distance">125 cm</div>
+            </div>
+
+            <!-- 系统状态模块 -->
+            <div class="data-panel system-panel">
+                <h2>System Status</h2>
+                <div class="data-value" id="system-status1">is_room_occupied:</div>
+                <div class="data-value" id="system-status2">someone_at_door:</div>
+                <div class="data-value" id="system-status3">is_outroom:</div>
+
+            </div>
+        </main>
+
+        <!-- 底部按钮 -->
+        <footer class="footer">
+                 <!-- 横向按钮排列 -->
+            <div class="button-row">
+                <!-- 刷新按钮 -->
+                <button class="button refresh-button">Refresh Data</button>
+                <!-- 停止更新按钮 -->
+                <button class="button stop-button">Stop Updating</button>
+            </div>
+             <!-- 返回登录按钮 -->
+            <a href="/login" class="back-button">return login</a>
+        </footer>
+    </div>
+    <script>
+        $(document).ready(function () {
+                let refreshInterval; // 定义全局变量存储定时器
+
+                // 刷新数据函数
+                function fetchSensorData() {
+                    $.ajax({
+                        url: '/refresh_data',
+                        type: 'GET',
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                const data = response.data;
+                                // 更新温度
+                                $('#temperature').text(data.temperature + '°C');
+                                // 更新距离
+                                $('#distance').text(data.distance + ' cm');
+                                // 更新系统状态
+                                $('#system-status1').text('is_room_occupied: ' + (data.is_room_occupied ? 'Yes' : 'No'));
+                                $('#system-status2').text('someone_at_door: ' + (data.someone_at_door ? 'Yes' : 'No'));
+                                $('#system-status3').text('is_outroom: ' + (data.is_outroom ? 'Yes' : 'No'));
+                            } else {
+                                alert('Error: ' + response.message);
+                            }
+                        },
+                        error: function () {
+                            alert('Failed to fetch data. Please try again.');
+                        }
+                    });
+                }
+
+                // 绑定刷新按钮点击事件
+                $('.refresh-button').on('click', function () {
+                    // 如果已有定时器运行，先清除旧定时器
+                    if (refreshInterval) {
+                        clearInterval(refreshInterval);
+                    }
+                    // 每秒钟调用一次 fetchSensorData
+                    refreshInterval = setInterval(fetchSensorData, 10000);
+                    alert('开始每10秒刷新数据！');
+                });
+
+                // 绑定停止按钮点击事件
+                $('.stop-button').on('click', function () {
+                    // 停止刷新
+                    clearInterval(refreshInterval);
+                    alert('自动刷新已停止');
+                });
+            });
+
+    </script>
+
+</body>
+</html>

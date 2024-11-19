@@ -1,0 +1,213 @@
+/* 基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    background: url("../image/2.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 容器布局 */
+.container {
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 模块间距 */
+}
+/* 返回按钮 */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+ /* 底部按钮容器 */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* 按钮的容器，用于横向排列 */
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* 按钮之间的间距 */
+        }
+
+        /* 统一按钮样式 */
+        .footer .button {
+            width: 200px;
+            background-color: #4CAF50; /* 按钮背景色 */
+            color: white; /* 按钮文字颜色 */
+            border: none; /* 无边框 */
+            padding: 10px 0;
+            border-radius: 5px; /* 圆角 */
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none; /* 移除链接下划线 */
+        }
+
+        /* 鼠标悬停效果 */
+        .footer .button:hover {
+            background-color: #0056b3; /* 悬停时变深蓝 */
+        }
+/* 统一按钮样式 */
+ .footer .back-button {
+    display: block;
+    width: 200px; /* 根据需要调整宽度 */
+    margin: 10px auto; /* 上下间距10px，水平居中 */
+    background-color: #007BFF; /* 按钮背景色 */
+    color: white; /* 按钮文字颜色 */
+    border: none; /* 无边框 */
+    padding: 10px 0; /* 上下内边距10px */
+    border-radius: 5px; /* 圆角 */
+    cursor: pointer; /* 鼠标指针为手形 */
+    font-size: 16px; /* 字体大小 */
+    text-decoration: none; /* 移除链接下划线 */
+}
+
+/* 鼠标悬停效果 */
+.footer .refresh-button:hover, .footer .back-button:hover {
+    background-color: #0056b3; /* 悬停时变深蓝 */
+}
+
+/* 顶部标题模块 */
+.header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1em;
+    color: #888;
+}
+
+/* 数据面板容器 */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 均分布局 */
+    gap: 20px; /* 面板间距 */
+    padding: 20px;
+}
+
+/* 单独数据面板 */
+.data-panel {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+<!--    justify-content: center;-->
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+
+
+/* 温度模块样式 */
+.data-panel .temperature-panel h2 {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.temperature-panel .data-value {
+    font-size: 2em;
+    color: #333;
+}
+
+.temperature-panel .sub-value {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.temperature-panel .thermometer {
+    height: 150px;
+    width: 20px;
+    background-color: #ddd;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.temperature-panel .thermometer-fill {
+    width: 100%;
+    height: 50%;
+    background-color: #4CAF50;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 距离模块样式 */
+.distance-panel .data-value {
+    font-size: 2em;
+    color: #333;
+}
+
+.distance-panel h2{
+    margin-bottom : 50px;
+}
+
+/* 系统状态模块样式 */
+
+.system-panel .data-value {
+    font-size: 1.2em;
+    color: #333;
+    text-align: left;
+}
+.system-panel  h2{
+    margin-bottom : 30px;
+}
+.system-panel #system-status1{
+    margin-bottom : 30px;
+    text-align: left;
+}
+.system-panel #system-status2{
+    margin-bottom : 30px;
+    text-align: left;
+}
+.system-panel #system-status3{
+    margin-bottom : 30px;
+    text-align: left;
+}
+
+/* 底部按钮 */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+}
+
+.footer .refresh-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.footer .refresh-button:hover {
+    background-color: #45a049;
+}
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能寝室监控系统</title>
+<!--    <link rel="stylesheet" type="text/css" href="../static/css/22.css"/>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 引入 jQuery -->
+</head>
+<style>
+    /* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景图片设置 */
+body {
+    font-family: Arial, sans-serif;
+    background: url("../image/2.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 半透明和模糊效果的容器 */
+.container {
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明效果 */
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    backdrop-filter: blur(10px); /* 背景模糊效果 */
+}
+
+/* 顶部标题部分 */
+.header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.header p {
+    font-size: 1em;
+    color: #888;
+}
+
+/* 数据面板布局 */
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.data-panel {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 180px;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.data-panel h2 {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 温度显示区域 */
+.temperature-panel .data-value {
+    font-size: 2em;
+    color: #333;
+}
+
+.temperature-panel .sub-value {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.thermometer {
+    height: 150px;
+    width: 20px;
+    background-color: #ddd;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.thermometer-fill {
+    width: 100%;
+    height: 50%;
+    background-color: #4CAF50;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 距离显示区域 */
+.distance-panel .data-value {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #333;
+}
+
+.distance-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.distance-options button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #555;
+    cursor: pointer;
+}
+
+.distance-options button:hover {
+    background-color: #ccc;
+}
+
+/* 系统状态显示 */
+.system-panel .data-value {
+    font-size: 2.5em;
+    color: #333;
+}
+
+/* 状态显示区域 */
+.status-panel .status-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+.status-panel .icon-sun {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.status-panel p {
+    font-size: 1em;
+    color: #333;
+}
+
+/* 底部刷新按钮 */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.refresh-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.refresh-button:hover {
+    background-color: #45a049;
+}
+
+</style>
+<body>
+    <div class="container">
+        <!-- 顶部标题部分 -->
+        <header class="header">
+            <h1>智能寝室</h1>
+            <p>Smart Dormitory Monitoring</p>
+        </header>
+
+        <!-- 温度、距离、系统状态显示区域 -->
+        <main class="dashboard">
+            <div class="data-panel temperature-panel">
+                <h2>Temperature</h2>
+                <div class="data-value">
+                    <span class="value" id="temperature">25.5°C</span>
+                    <span class="sub-value" id="temperature-sub">±2.5°C</span>
+                </div>
+                <div class="thermometer">
+                    <div class="thermometer-fill"></div>
+                </div>
+            </div>
+
+            <div class="data-panel distance-panel">
+                <h2>Distance</h2>
+                <div class="data-value">
+                    <span class="value" id="distance">125°C</span>
+                </div>
+
+            </div>
+
+            <div class="data-panel system-panel">
+                <h2>System Status</h2>
+                <div class="data-value">
+                    <span class="value" id="system-status">120</span>
+                </div>
+            </div>
+
+
+        </main>
+
+        <!-- 底部按钮 -->
+        <footer class="footer">
+            <button class="refresh-button">Refresh Data</button>
+        </footer>
+    </div>
+
+    <script>
+        function fetchSensorData() {
+            $.ajax({
+                url: '/get_sensor_data',
+                type: 'GET',
+                success: function(data) {
+                    if (data.error) {
+                        console.error('Error fetching data: ', data.error);
+                    } else {
+                        // 更新温度
+                        $('#temperature').text(data.temperature + '°C');
+                        $('#temperature-sub').text('±' + (Math.random() * 2 + 1).toFixed(1) + '°C'); // 模拟温度的波动
+
+                        // 更新距离
+                        $('#distance').text(data.distance + 'cm');
+
+                        // 更新系统状态
+                        $('#system-status').text(data.is_outroom ? 'Out of Room' : 'In Room');
+
+                        // 更新状态图标
+                        $('#status-icon').css('background-color', data.is_room_occupied ? '#4CAF50' : '#F44336');
+                        $('#status-text').text(data.is_room_occupied ? 'Occupied' : 'Vacant');
+                    }
+                },
+                error: function() {
+                    console.error('Failed to fetch data.');
+                }
+            });
+        }
+
+        // 页面加载后每秒钟调用一次更新函数
+        setInterval(fetchSensorData, 1000);
+    </script>
+</body>
+</html>
